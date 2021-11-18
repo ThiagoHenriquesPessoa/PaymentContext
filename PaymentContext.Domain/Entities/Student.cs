@@ -7,6 +7,7 @@ namespace PaymentContext.Domain.Entities
 {
     public class Student : Entity
     {
+        private IList<string> Notification;
         private IList<Subscription> _subscriptions;
         public Student(Name name, Document document, Email email)
         {
@@ -14,6 +15,11 @@ namespace PaymentContext.Domain.Entities
             Document = document;
             Email = email;
             _subscriptions = new List<Subscription>();
+
+            if (string.IsNullOrEmpty(name.FirstName))
+            {
+                Notification.Add("Nome invalido");
+            }
         }
 
         public Name Name { get; private set; }
